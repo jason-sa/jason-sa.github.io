@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Where do you put your volunteers?!?
+gh-repo: jason-sa/Toucans
+gh-badge: [star, fork, follow]
+tags: [EDA, Metis]
 ---
 
 # Background
