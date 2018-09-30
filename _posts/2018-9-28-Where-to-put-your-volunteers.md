@@ -35,7 +35,7 @@ We took a two step approach to our analysis.
 The distance was calculated between each MTA Station and 14 of the top donors. Any station not within 0.5 miles of one of the 14 top companies was excluded from the list. The distance threshold of 0.5 miles was chosen as a reasonable amount of walking from a MTA station to the person's origin or final destination. 
 
 Here is the analysis visually. 
-![station selection image](/images/station_selection.svg)
+![station selection image](/img/station_selection.svg)
 
 The first map is showing all 14 companies who are significant donors to the Grace Hopper organization, and all of them are located in lower Manhattan. The middle map shows all stations plotted in red within 0.5 miles, and the size of the bubble the relative size of the station in terms of average daily entries over May 2018. The last map shows the top 6 stations based on a new score to take into account average daily entries and their proximity to other companies. The scoring function we used is simple and calcualted as average daily entries times the number of companies within 0.5 miles. The table summarizes the top 6 station-company pairings.
 
@@ -61,7 +61,7 @@ The darker the color in the heatmap the more people enter the station. You can e
 # Recommendation
 All of this analysis is great, but what exactly can WYWT actually do with this information to change their strategy for their next gala? The key result from this analysis is a schedule. The top 3 shift-day pairings can be determined for each of the top 6 stations and a new volunteer shift scheduled can be generated.
 
-![Schedule Gantt Chart](/images/gantt_schedule.png)
+![Schedule Gantt Chart](/img/gantt_schedule.png)
 
 The Gantt chart is showing the 6 stations in the rows and day/shift in the columns. The green cells indicate the suggested shifts. The previous brute force schdeuling methodology would have resulted in 90 shifts for these 6 stations. Our targeted approach resulted in a 18 shift schedule. This is an 80% reduction in volunteer shifts and a better strategy to targeting the right people for the annual WYWT summer gala.
 
