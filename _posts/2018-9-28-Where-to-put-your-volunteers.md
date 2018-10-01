@@ -6,7 +6,7 @@ gh-badge: [star, fork, follow]
 tags: [EDA, Metis]
 ---
 
-I have recently started the Metis Data Science immersive program in Seattle. I am apart of the Fall 2018 cohort, and I will be bloging about the Data Science projects I will be creating throughout my 12 week program. On to the first project...
+I have recently started the [Metis Data Science](https://www.thisismetis.com/data-science-bootcamps) immersive program in Seattle. I am apart of the Fall 2018 cohort, and I will be bloging about the Data Science projects I will be creating throughout my 12 week program. On to the first project...
 
 # WomenYesWomenTech
 
