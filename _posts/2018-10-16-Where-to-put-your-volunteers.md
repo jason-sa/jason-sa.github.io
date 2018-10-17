@@ -6,85 +6,104 @@ gh-badge: [star, fork, follow]
 tags: [Linear Regression, Metis, MLB]
 ---
 
-Ahh it's October, and there is no better time to talk about baseball than now! What a great sport baseball is with such a wonderful history and a plethora of statistics to assess the performance of each player and team. I decided to tackle a fundamental question related to baseball, how do you keep your top rookie's longer. A team spends significant amount of time, effort, and captial in developing talent, but can, and more often than not, lose the talent to free agency. How does a team retain this talent?
+Ahh it's October, and there is no better time to talk about baseball than now! What a great sport baseball is with such a wonderful history and a plethora of statistics to assess the performance of each player and team. I decided to tackle a fundamental question related to baseball, how do you keep your top talent longer? A team spends significant amount of time, effort, and captial in developing talent, but teams more often than not lose their talent to free agency. How does a team retain this talent?
 
-I approached this topic with a focus on how can a MLB organization smartly offer a young player a contract to keep them longer than the minium 6 years, as part of the recent [CBA](http://m.mlb.com/glossary/transactions/free-agency). Specifically, can the salary in year 6 be predicted with only rookie year stats?
+I approached this broad topic with a focus on how can a MLB organization smartly offer a young player a contract to keep them longer than the minium 6 years. The 6 years threshold is related to the most recent [CBA](http://m.mlb.com/glossary/transactions/free-agency) defining free agenct. Specifically, can the salary in year 6 be predicted with only rookie year stats?
 
-This is my second project as continue down my 12-week journey in the immersive [Metis Data Science](https://www.thisismetis.com/data-science-bootcamps) program. Let's get started by looking at why is this a relevant question.
+This is my second project as I continue down my 12-week journey in the immersive [Metis Data Science](https://www.thisismetis.com/data-science-bootcamps) program. First, we will review the motivation for why this question is of value, then how I went about answering questions, the results of my analysis, and next steps to extend the analysis.
 
 # Motivation
 
-WomenYesWomenTech (WYWT) is an organization that hosts an annual gala in early summer to promote women in tech. They have hosted the gala for many years and the gala attendees are invited through a canvassing campaign in NYC. The volunteers attempt to get email addresses of potential participants by standing outside MTA stations to invite them to the gala. A pretty simple idea, WYWT goes to the streets of New York to garner support for their great organization, and have a big celebration / fundraiser in the form of a gala.
-
-# Challenge
-
-The leadership team of WYWT has realized over the years they are not necessarily getting the right mix of people at these galas to generate the right financial support the organization needs to continue their great work. Additionally, they have employed volunteer scheduling approach of putting their volunteers at the largest stations for 3 shifts a day 5 days a week. The leadership team is starting to believe this type of approach may not be sustainable for their volunteers. WYWT leadership team have a fundamental question, which MTA stations should be targeted by their volunteer staff and what would be the best volunteer schedule?
+Free agency is a hot topic as we are about to enter this off-season with top names like Manny Machado and Bryce Harper becoming free agents. Bryce Harper, of the Nationals, has received most of the attention as pundits are predicting a 35M salary in 2019 and a 400M total contract value, which would be a leauge record! It is highly unlikely the Nationals will be able to pay this price tag, and keep their other marquis players singed during previous free agency years, i.e. Max Scherzer. Ultimately, the Nationals will lose Bryce Harper and this will most likely have an adverse impact on them returning to post-season baseball anytime soon. What if the Nationals could turn back time, assess Bryce Harper's value during his rookie year, and develop a strategy to sign Bryce Harper prior to him leaving through free agency? This idea is not unprecedented and has occured for other marquis players, and Anthony Castrovince has a great [article](http://www.sportsonearth.com/article/264873218/mlb-hot-stove-free-agents-earlier-extensions) on this topic. What if you could predict salary in year 6 with rookie stats?
 
 # Methodology
 
-Our team solved this challenge by assimilating data from different freely available sources and performing exploratory data analysis. We will first review the data sources utilized, then discuss the analysis performed on these data sources, next discuss the results from the analysis, and lastly what future work could be done.
+There were two main phases to my methodology, data acquisition and modeling / analysis. First, let's review how the data was acquired, filtered, and transformed for the model.
 
-## Data
+## Data Acquisition
 
-We compiled the following data sources,
+I gathered data by scraping [BaseballReference](https://www.baseball-reference.com/) gathering all rookie players, their stats, and salary data from 1985 - 2017. The data were filtered further down to focus only on non-pitchers, traditional offensive statistcs, e.g. HR, H, 2B, 3B, etc., and only those players who played for at least 6 years. This added bias to my model as I was only looking at players who are "good enough" to play in the MLB for 6 years, but there is no great way of knowing whether a rookie today will continue to play in 6 years time. The model expects some expert assessment on whether or not the rookie player in question is capable of sustaining at least a 6 year career.
 
-* [MTA Turnstile Data](http://web.mta.info/developers/turnstile.html) - Historical turnstile data for every turnstile in the MTA network.
-* [MTA Station Master Data](https://data.cityofnewyork.us/Transportation/Subway-Stations/arq3-7z49) - Location data for every station in the MTA network.
-* [Grace Hopper](https://ghc.anitab.org/2017-sponsorships/corporate-sponsors/) - List of major sponsors for the Grace Hopper organization.
+Data were acquired, and now some transformations were needed prior to running and selecting the best fit model. First, the salary in year 6 we are trying to predict was heavily skewed right, which is typical very few high-earners compared to average earners. The salary data was log transformed to account for skewnes. You can see this in the plot below.
 
-The hypothesis is companies who support [Grace Hopper](https://ghc.anitab.org/) should also desire to support WYWT. If we can succesfully identify those stations who are physically close to the list of Grace Hopper companies and analyze the entries by hour for each station, then a volunteer schedule can be generated.
+[ADD SALARY PLOT]
 
-## Analysis
+Next the feature set was selected which are listed below.
 
-We took a two step approach to our analysis.
+|Feature|Description
+|---|---|
+|HR |Home runs|
+|H |Hits|
+|R |Runs|
+|SB |Stolen Bases|
+|TB |Total Bases|
+|2B |Doubles|
+|3B |Triples|
+|RBI |Runs batted in|
+|BB |Walks|
+|SO |Strike outs|
+|G |Games|
+|PA |Plate appearences|
+|AB |Official at bats|
+|age |Age during rookie year|
 
-1. Identify all stations which are within walking distance of each of the Grace Hopper locations.
-2. Once stations are identfied, then the exact time of day can be identified.
+Age was added to the feature set as there was a slight negative corrleation between age and salary, and thus could have some influence on predicting salary. This is natural as the older a player is during their rookie year, then less potential value the player could have in year 6.
 
-### Station Identification
+[ADD AGEvSALARY scatter plot]
 
-The distance was calculated between each MTA Station and 14 of the top donors. Any station not within 0.5 miles of one of the 14 top companies was excluded from the list. The distance threshold of 0.5 miles was chosen as a reasonable amount of walking distance from a MTA station to the person's origin or final destination.  
+We now have basic definitions of what we are attempting to predict, log salary year 6, and the set of feature which will we expect to have predictive power. Let's now move on to the model selection process.
 
-Here is the analysis visually.  
+## Modeling / Analysis
 
-![station selection image](/img/station_selection.svg)
+The goal of my model is to answer, "What is the salary in year 6 based upon rookie year stats?" I utlized linear regression model to answer this question. This section will get technical, so please feel free to skip ahead to the Results section if you are less technically inclined.
 
-The first map is showing all 14 companies who are significant donors to the Grace Hopper organization, and all of them are located in lower Manhattan. The middle map shows all stations plotted in red within 0.5 miles, and the size of the bubble is the relative size of the station in terms of average daily entries analyzed over May 2018. The last map shows the top 6 stations based on a new score developed for this analysis to take into account average daily entries and their proximity to other companies. The scoring function we used is simple and calcualted as average daily entries times the number of companies within 0.5 miles. The table summarizes the top 6 station-company pairings.
+The data was split into tran/test data sets using random sampling. The train data set represented 80% of the sample, and test data set represented 20% of the sample. Three different classes of models were considered and all compared via out-of-sample error using a 10-fold cross validation. The three types of models were,
 
-| Station | Avg. Daily Entries | Num of Companies | Score |
-|---|---:|---:|---:|
-| 34 ST-HERALD SQ | 16,186 | 4 | 64,744
-| TIMES SQ-42 ST  | 14,745 | 4 | 58,982
-| 42 ST-BRYANT PK | 5,472  | 9 | 49,254
-| 34 ST-PENN STA  | 11,769 | 4 | 47,077
-| 47-50 STS ROCK  | 7,446  | 5 | 37,230
-| 14 ST-UNION SQ  | 15,727 | 2 | 31,455
+|Model Type|
+|---|
+|Linear (OLS)|
+|Feature Standardization + Lasso regularization|
+|Polynomial features + Feature standardization + Lasso Regularization|
 
-You can see the effect of the scoring by reviewing the Bryant Pk station. The station is on average smaller volume compared to the other stations, but is centrally located to **9** other Grace Hopper companies. Bryant Park makes the list as we conclude the sation is low volumne, but has a higher concentration of people WYWT would desire at their gala.
+The results and ranking of each different type of model is described below.
 
-### Station Timing
+|Rank |Model |Polynomial Deg.|Lambda|RMSE (CHANGE ME) |
+---|---|---|---|---
+|0 |Lasso |3 |0.01 |0.161218
+|1 |Lasso |2 |0.01 |0.161348
+|2 |Lasso |4 |0.01 |0.161483
+|3 |Lasso |5 |0.01 |0.162328
+|4 |Lasso |NA |0.01 |0.162541
+|5 |Linear |NA | NA|0.163087
 
-The list of stations has been narrowed down to top 6, and now the question is when should the volunteers be at each of the 6 stations? This question was answered by first segmenting the MTA turnstile data by day of week and by volunteer shift range. The Morning shift was defined as 7 a.m. - 11 a.m., the afternoon shift as 11 a.m. - 3 p.m., and the evning shift as 3 p.m. - 7 p.m. Segmenting the data in this way allowed us to analyze each potential shift by day of week to identify the top 3 shifts WYWT should target each week for each of the top 6 stations.  
+Utilizing a simple grid search like algorithm the model with 3<sup>rd</sup> degree polynomials (and interactions) plus feature standardization and lasso regularization resulted in the smallest error.
 
-For example, let's look at the Hearld SQ station in the heatmap below.
+# Results
 
-![34th heatmap](/img/34_ST-HERALD_SQ.svg)
+What does this actually mean for an executive or GM for an MLB team? Let's first consider a simple baseline model of whatever players have made historically in year 6 in the MLB between 1985 - 2017 is most likely what any rookie will make in year 6. Given this baseline model, then let's compare the accuracy of this model to the one I created to predict salary in year 6. We are going to compare the two models by grouping the prediction error into 3 groups,
 
-The darker the color in the heatmap the more people enter the station during that shift and day of week. You can easily see in the heatmap that the top 3 times to be at Herald SQ station is during the evning shift Tuesday - Thursday. This makes a lot of sense as this is the evening commute time and typically a holiday or long weekends will not impact a Tuesday - Thursday type of schedule.
+|Group | Description|
+|---|---|
+|Over-estimated | The model predicted a salary which is at least 50% higher than actual salary.
+|Estimated | The model predicted a salary that is within 50% of the actual salary.
+|Under-estimated | The model predicted a salary which is at most 50% lower than actual salary.
 
-# Recommendation
+The comparison of the two groups can be summarized in the chart below which categorizes the 194 players randomly selected as the assessment data set for the model.
 
-All of this analysis is great, but what exactly can WYWT actually do with this information to change their strategy for their next gala? The key result from this analysis is a schedule. The top 3 shift-day pairings can be determined for each of the top 6 stations and a new volunteer shift scheduled can be generated.
+[ADD CHART]
 
-![Schedule Gantt Chart](/img/gantt_schedule.png)
-
-The Gantt chart is showing the 6 stations in the rows and day/shift in the columns. The green cells indicate the suggested shifts. The previous brute force schdeuling methodology would have resulted in 90 shifts for these 6 stations. Our targeted approach resulted in a 18 shift schedule. This is an 80% reduction in volunteer shifts and a better strategy to targeting the right people for the annual WYWT summer gala.
+You can see the bucket of estimated salaries grew from the baseline model to the model I created. This is good news as it shows there is a statistically significant signal when utilizing a feature set consisting of traditional offensive statistics. The buckets of over-estimated and under-estimated are still quite large which means there is some variance in the prediction of year 6 salary which is not explainable by these features.
 
 # Future Work
 
-The analysis was focused on exploratory data analysis (EDA) which is always a good first step. You would never want to build a complicated machine learning or regression or any other type of model, without first understanding data **AND** if you are providing the right output for your client / sponsor. Once these activities are completed, then these following areas can be explored further to make a more robust model.
+What could be considered to improve the overall accuracy of this inital model. Here are some next steps which could add value to the current model.
 
-* Incorporating specific demographic data into the station selection algorithm. For example, is WYWT attempting to target a certain household income?
-* Consider the size of the company in NYC to influence the station selection algorithm.
-* Expand or shorten the company list, in case WYWT has certain compaines they would like to target.
-* Incorporating a target number of volunteer shifts and perform sensitivity analysis on adding or subtracting a shift.  
+* Include new saber metric / statcast statistics as features in the model, e.g. WAR, exit velocity, launch angle, etc.  
+* Segment data by position. Typically, Catchers or Shortstops do not necessairly have as high traditional hitting statistics compared to Outfielders or First basemen, and thus could cause conflating signals when attempting to predict salaries.  
+* Include the first 2 years of a player's career, instead of just the first year. There isn't much history, if at all, of a player receiving a contract after their rookie year. Including multiple years of data could potentially smooth out erratic rookie performance in first or second year of their career.
+
+Hope you enjoyed this high-level summary and if interested you can see all of the detailed code in my github [repository](https://github.com/jason-sa/baseball_lin_regression)
+
+# Next Project
+
+I am now moving onto my next project which is a classification problem based on e-commerce data. If you are intereseted, then you can check out the [repository](https://github.com/jason-sa/classification) with the project proposal. You can expect a new blog post by early November summarizing this project. 
