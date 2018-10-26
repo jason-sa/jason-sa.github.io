@@ -44,7 +44,7 @@ Next, the feature set was selected which are listed below.
 |3B |Triples|
 |RBI |Runs batted in|
 |BB |Walks|
-|SO |Strike outs|
+|SO |Strikeouts|
 |G |Games|
 |PA |Plate appearances|
 |AB |Official at bats|
@@ -60,7 +60,7 @@ We now have basic definitions of what we are attempting to predict, log salary i
 
 The goal of my model is to answer, "What is the salary in year 6 based upon rookie year stats?" I utilized linear regression model to answer this question. This section will get technical, so please feel free to skip ahead to the [Results](#results) section if you are less technically inclined.
 
-The data was split into tran/test data sets using random sampling. The train data set represented 80% of the sample, and test data set represented 20% of the sample. Three different classes of models were considered and all compared via out-of-sample error using a 10-fold cross validation. The three types of models were,
+The data was split into train/test data sets using random sampling. The train data set represented 80% of the sample, and test data set represented 20% of the sample. Three different classes of models were considered and all compared via out-of-sample error using a 10-fold cross validation. The three types of models were,
 
 |Model Type|
 |---|
