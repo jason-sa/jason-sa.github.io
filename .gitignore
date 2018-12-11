@@ -1,3 +1,6 @@
+# custom
+.vscode
+
 # project
 _site
 .sass-cache
