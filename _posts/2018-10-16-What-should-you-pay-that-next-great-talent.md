@@ -29,30 +29,31 @@ I gathered data by scraping [BaseballReference](https://www.baseball-reference.c
 
 First, the salary in year 6 was heavily skewed right, which is typical as there are very few high-earners compared to average earners. The salary data was log transformed to account for skewness. You can see this in the plot below.
 
-![salary_plot](../img/salary_comparison.png)
+![salary_plot](/img/salary_comparison.png)
 
 Next, the feature set was selected which are listed below.
 
 |Feature|Description
-|---|---|
-|HR |Home runs|
-|H |Hits|
-|R |Runs|
-|SB |Stolen Bases|
-|TB |Total Bases|
-|2B |Doubles|
-|3B |Triples|
-|RBI |Runs batted in|
-|BB |Walks|
-|SO |Strikeouts|
-|G |Games|
-|PA |Plate appearances|
-|AB |Official at bats|
-|age |Age during rookie year|
+---|---|
+HR |Home runs
+H |Hits
+R |Runs
+SB |Stolen Bases
+TB |Total Bases
+2B |Doubles
+3B |Triples
+RBI |Runs batted in
+BB |Walks
+SO |Strikeouts
+G |Games
+PA |Plate appearances
+AB |Official at bats
+age |Age during rookie year
+{: .center}
 
 Age was added to the feature set as there was a slight negative correlation between age and salary, and thus could have some influence on predicting salary. This is natural as the older a player is during their rookie year, the less potential value that player could have in year 6.
 
-![age_v_salary](../img/age_v_salary.png)
+![age_v_salary](/img/age_v_salary.png)
 
 We now have basic definitions of what we are attempting to predict, log salary in year 6, and the set of features we expect to have predictive power. Let's now move on to the model selection process.
 
@@ -67,6 +68,8 @@ The data was split into train/test data sets using random sampling. The train da
 |Linear (OLS)|
 |Feature Standardization + Lasso regularization|
 |Polynomial features + Feature standardization + Lasso Regularization|
+{: .center} 
+
 
 The results and ranking of each different type of model is described below.
 
@@ -78,6 +81,7 @@ The results and ranking of each different type of model is described below.
 |3 |Lasso |5 |0.01 |0.402899
 |4 |Lasso |NA |0.01 |0.403164
 |5 |Linear |NA | NA|0.403841
+{: .center} 
 
 Utilizing a simple grid search algorithm the model with 3<sup>rd</sup> degree polynomials (and interactions) plus feature standardization and lasso regularization resulted in the smallest error.
 
@@ -90,10 +94,11 @@ We have this nice model, but what does this actually mean for an executive or GM
 |Over-estimated | The model predicted a salary which is at least 50% higher than actual salary.
 |Estimated | The model predicted a salary that is within 50% of the actual salary.
 |Under-estimated | The model predicted a salary which is at most 50% lower than actual salary.
+{: .center} 
 
 194 randomly selected players were held out from training the model, and the comparison of the two groups can be summarized in the chart below.
 
-![salary_prediction](../img/salary_prediction_accuracy.png)
+![salary_prediction](/img/salary_prediction_accuracy.png)
 
 You can see the bucket of estimated salaries grew from the baseline model to the model I created. This is good news as it shows there is a statistically significant signal when utilizing a feature set consisting of traditional offensive statistics. The buckets of over-estimated and under-estimated in the linear model are still quite large which means there is some variance in the prediction of year 6 salary which is not explainable by traditional offensive statistics.
 
