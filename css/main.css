@@ -4,10 +4,17 @@ layout: null
 
 @import url("pygment_highlights.css");
 
-/* Center image captions */
+/* --- Center image captions --- */
 
 img + em { display: block; text-align: center;}
 
+/* --- Center images (https://thornelabs.net/2014/11/30/centering-images-with-jekyll-and-markdown.html) --- */
+
+.center-image
+{
+    margin: 0 auto;
+    display: block;
+}
 /* --- General --- */
 
 body {
@@ -671,6 +678,14 @@ table tr td :first-child {
 table tr th :last-child,
 table tr td :last-child {
   margin-bottom: 0;
+}
+
+/* --- Added table centering style --- */
+
+table.center {
+  width:70%; 
+  margin-left:15%; 
+  margin-right:15%;
 }
 
 /* --- Code blocks --- */

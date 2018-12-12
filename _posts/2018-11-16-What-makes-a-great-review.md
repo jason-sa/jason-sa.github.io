@@ -5,6 +5,7 @@ title: What makes a great review?
 gh-repo: jason-sa/amazon_product_trend_classification
 gh-badge: [star, fork, follow]
 tags: [Classification, NLP, Topic Modeling, Metis]
+mathjax: true
 ---
 
 I wanted to explore the relationship of product reviews to the success of the product. We live in a culture of providing reviews and comments on the products we buy is common place. I was curious if these comments could indicate whether or not the product would be successful or not. If some signal could be identified from initial product reviews, then this could be utilized in a company’s forecasting process to help improve the overall accuracy of a product’s forecast. Overall, this model could be utilized to reduce the risk of introducing a new product into a market and help to answer the question of when to ramp up upstream production to capitalize on a trending product.
@@ -17,7 +18,8 @@ I utilized historical Amazon toy review data provided by Amazon and hosted [here
 
 The data was first filtered to consider only 2014 to 2015, which resulted in 211,229 unique products with at least one review. I only considered reviews within a 30-day time window from the first review to calculate the product trend score. The distribution of first reviews can be seen below.
 
-![first review recorded](img/first_recorded_review.png)
+![first review recorded](/img/first_recorded_review.png)
+*Figure 1: Time series of when the first review occured for each product.*
 
 ## Product Trend Score
 
@@ -25,10 +27,15 @@ The product trend score needed to be calculated to generate the ground truth for
 
 The trend scores was calculated as,
 
-1. Review rate (RR) = Total # of Reviews / 30
-2. Adj. Star Rating (ASR) = Star Rating ^ 1.5
-3. Review Success (RS) = (RR * Median ASR) / (Stdev ASR)
-4. Trend Score = tanh(RS)
+$$
+\begin{align*}
+\text{Review rate (RR)} &= \frac{\sum{\text{Reviews}}}{30} \\ \\
+\text{Adj. Star Rating (ASR)} &= \text{Star Rating}^{1.5} \\ \\
+\text{Review Success (RS)} &= \frac{( \text{RR} * \text{Median ASR} )}{s_{ASR}}\\ \\
+\text{Trend Score} &= \tanh(RS)
+\end{align*}
+$$
+
 
 The Review Success calculation can be interpreted as a product with a lot of reviews, high star rating, and consistently rated will result in a high Review Success. The Trend Score is simply a normalization of the Review Success metric onto the tanh space. This results in Trend Scores ranging from 0 to 1.
 
@@ -38,8 +45,11 @@ Finally, a product was classified as trending or not if the product had a trend 
 
 The goal of this model was to determine if the first review for each product could signal whether or not the product will trend over the first 30 days. I generated word clouds for the trending and not trending products to see if there could be any high level differences between the two groups.
 
-![trending product word cloud](img/trend_word_cloud.png)
-![not trending product word cloud](img/not_trend_word_cloud.png)
+![trending product word cloud](/img/trend_word_cloud.png)
+*Figure 2: Common words in product reviews which trended*
+
+![not trending product word cloud](/img/not_trend_word_cloud.png)
+*Figure 3: Common words in product review which did not trend*
 
 You can see there are some high-level differences between the trending and not trending products. I preformed a train/test split of 75/25, and then  extracted these differences by utilizing a LDA model on the count vectorization which included single and bi-grams of the first review. I found 5 topics to make the most sense in terms of accuracy for my classification model. A sampling of the most common word in each topic are given in the table below.
 
@@ -55,6 +65,7 @@ You can see there are some high-level differences between the trending and not t
 |great|becaus|gift|bought|pictur
 |grandson|like|arriv|birthday|price
 |togeth|back|item|size|color
+{: .center}
 
 ## Classification model selection
 
@@ -66,6 +77,7 @@ I chose to use XGBoost gradient boosting classifier algorithm to train my model.
 5 topic SMOTE|0.712
 10 topic|0.711
 10 topic SOMTE + Tomek|0.716
+{: .center}
 
 The XGBoost parameters selected were.
 
@@ -75,6 +87,7 @@ The XGBoost parameters selected were.
 |learning_rate|0.459|
 |max_depth|2|
 |n_estimators|490|
+{: .center}
 
 I then needed to decide the probability cut-off to classify a product as trending or not. The error tradeoff is the following scenario,
 
@@ -101,10 +114,11 @@ In conclusion, the first review did provide some initial insight into whether or
 * Determine if adding more reviews, e.g. the first n days the product is on the market, to see if this improves the overall recall of my model. 
 * Would also like to explore a model with word embeddings to determine if this would improve model recall by relating similar documents in a word embedding space, instead of an LDA topic model.
 
-# *Review generator app*
+# Review generator app
 
 I decided to productize my model by creating a Flask app which takes a review, determines the review trending probability, and analyzes the submitted review to see if a single word could be swapped out to improve the trend probability. A screen shot of the app is below.
 
-![review app screen shot](img/review_app_screen_shot.png)
+![review app screen shot](/img/amazon_review_app.gif){: .center-image}
+*Figure 4: Demo of the review app*
 
 I would love to enhance the app further by attempting to replace phrases instead of single words. Could it be possible to provide a product description, and then generate a review which would encourage the product to trend the most?
