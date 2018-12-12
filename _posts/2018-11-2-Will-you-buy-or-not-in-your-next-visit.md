@@ -5,6 +5,7 @@ title: Will you buy or not in your next visit?
 gh-repo: jason-sa/question_intent_classification
 gh-badge: [star, fork, follow]
 tags: [Classification, Metis]
+mathjax: True
 ---
 
 E-commerce sites are constantly analyzing and mining web traffic data to gain insight into customer behavior. In particular, e-commerce sites want to know whether or not a visitor is about to make a purchase. If not, then what is holding this visitor back from purchasing? What can be done to encourage the visitor to purchase something in the future? 
