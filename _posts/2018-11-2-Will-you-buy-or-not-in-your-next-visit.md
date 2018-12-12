@@ -63,6 +63,7 @@ Random Forest| SMOTE| 0.779
 Gradient Boost| SMOTE| 0.857
 Gradient Boost| SMOTE + Tomek| 0.875
 Gradient Boost| SMOTE + Edited Nearest Neighbors| 0.999
+{: .center} <!-- align center for the table, .center class in main.css  -->
 
 The AUC reported by BayesSeachCV is the best AUC of the test data generated in the cross validation process. The Gradient Boost with SMOTE + Edited Nearest Neighbors resulted in the best AUC and was selected as the best model.
 
@@ -78,6 +79,7 @@ First, I compared the F1-score, recall, and precision between the two models wit
 F1| 0.21| 0.079
 Recall| 0.54| 0.073
 Precision| 0.13| 0.087
+{: .center}
 
 The trained Gradient Boost model performed well. I then ran the same two models on the test data, and the results are below.
 
@@ -86,6 +88,7 @@ The trained Gradient Boost model performed well. I then ran the same two models 
 F1| 0.08| 0.083
 Recall| 0.21| 0.076
 Precision| 0.05| 0.091
+{: .center}
 
 The scores for the trained Gradient Boost model got worse, and appears that I may have over-fitted the model. I did not have time to analyze this further as this seems contrary given my process to use 10-fold CV. However, the model did show an improvement compared to the baseline model in accurately identifying sessions which actually bought as buy. The model however did increase the number of false positives compared to baseline, and thus a less precise model.
 
