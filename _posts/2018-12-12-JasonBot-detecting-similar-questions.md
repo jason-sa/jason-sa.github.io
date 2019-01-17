@@ -4,7 +4,7 @@ mathjax: true
 title: JasonBot - Answering your questions with NLP
 gh-repo: jason-sa/question_intent_classification
 gh-badge: [star, fork, follow]
-tags: [NLP, Classification, bot, Slack, Metis]
+tags: [NLP, xgboost, bot, Slack, Metis]
 ---
 
 I wanted to explore the NLP topic of semantic similarity between questions. Specifically, whether or not two questions have the same intent or not.  Training a classification model to detect whether or not two questions have the same intent can lend itself to different applications. For example, the model could be used to easily lookup answers to previously asked questions. I took this example and developed a proof of concept Slack bot to demonstrate how my trained model could search previously answered questions, and responded with similar answers.

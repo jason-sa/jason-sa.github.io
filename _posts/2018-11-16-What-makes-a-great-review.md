@@ -4,7 +4,7 @@ mathjax: true
 title: What makes a great review?
 gh-repo: jason-sa/amazon_product_trend_classification
 gh-badge: [star, fork, follow]
-tags: [Classification, NLP, Topic Modeling, Metis]
+tags: [xgboost, Classification, NLP, Topic Modeling, Metis]
 mathjax: true
 ---
 

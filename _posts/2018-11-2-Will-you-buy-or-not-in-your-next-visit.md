@@ -4,7 +4,7 @@ mathjax: true
 title: Will you buy or not in your next visit?
 gh-repo: jason-sa/classification
 gh-badge: [star, fork, follow]
-tags: [logistic regression, gradient boost, random forrest, e-commerce, Metis]
+tags: [logistic regression, xgboost, random forrest, e-commerce, Metis]
 mathjax: True
 ---
 
