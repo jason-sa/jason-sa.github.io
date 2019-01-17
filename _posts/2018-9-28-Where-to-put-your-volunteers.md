@@ -55,6 +55,7 @@ The first map is showing all 14 companies who are significant donors to the Grac
 | 34 ST-PENN STA  | 11,769 | 4 | 47,077
 | 47-50 STS ROCK  | 7,446  | 5 | 37,230
 | 14 ST-UNION SQ  | 15,727 | 2 | 31,455
+{: .center}
 
 You can see the effect of the scoring by reviewing the Bryant Pk station. The station is on average smaller volume compared to the other stations, but is centrally located to **9** other Grace Hopper companies. Bryant Park makes the list as we conclude the sation is low volumne, but has a higher concentration of people WYWT would desire at their gala.
 
@@ -64,7 +65,7 @@ The list of stations has been narrowed down to top 6, and now the question is wh
 
 For example, let's look at the Hearld SQ station in the heatmap below.
 
-![34th heatmap](/img/34_ST-HERALD_SQ.svg)
+![34th heatmap](/img/34_ST-HERALD_SQ.svg){: .center-image}
 
 The darker the color in the heatmap the more people enter the station during that shift and day of week. You can easily see in the heatmap that the top 3 times to be at Herald SQ station is during the evning shift Tuesday - Thursday. This makes a lot of sense as this is the evening commute time and typically a holiday or long weekends will not impact a Tuesday - Thursday type of schedule.
 

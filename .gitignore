@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 # customer
 .vscode
+=======
+# custom
+.vscode
+
+>>>>>>> dev
 # project
 _site
 .sass-cache
