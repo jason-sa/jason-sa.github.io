@@ -17,7 +17,7 @@ Next, I cleaned and lemmatized the questions using the spaCy model, [en_core_web
 
 Next, I trained Random Forrest and Gradient Boosted models. The Gradient Boosted model was the `xgboost` implementation. I hyper tuned both the best Random Forrest and Gradient Boosted model, and ultimately selected the Gradient Boosted model based on average validation AUC in 3-fold cross validation.
 
-Finally, I utilized a question and answer [data set](http://www.msmarco.org/dataset.aspx) from MS MARCO as the basis for all known questions and answers in the Slack bot. The Slack bot was developed utilizing `Flask` to handle the HTTP requests from from the Slack API, and `ngrok` to expose the Flask server to the Slack API server.  
+Finally, I utilized a question and answer [data set](http://www.msmarco.org/dataset.aspx) from MS MARCO as the basis for all known questions and answers in the Slack bot. The Slack bot was developed utilizing `Flask` to handle the HTTP requests from from the Slack API, and `ngrok` to expose the Flask server to the Slack API server.
 
 # Feature Engineering
 
@@ -35,7 +35,7 @@ Where $$S_1$$ is the set of n-grams from the first question, and $$S_2$$ is the 
 
 ## Distance features
 
-I utilized GloVe word embeddings provided by the spaCy `en_core_web_lg` model to calculate distance features for each question. The minimum, maximum, and average distance between all words in a question were calculated. The set of features was calculated on the individual question, rather than the pair of questions. 
+I utilized GloVe word embeddings provided by the spaCy `en_core_web_lg` model to calculate distance features for each question. The minimum, maximum, and average distance between all words in a question were calculated. The set of features was calculated on the individual question, rather than the pair of questions.
 
 ### Example
 
