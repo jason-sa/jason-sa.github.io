@@ -4,11 +4,15 @@ mathjax: true
 title: What makes a great review?
 gh-repo: jason-sa/amazon_product_trend_classification
 gh-badge: [star, fork, follow]
-tags: [xgboost, Classification, NLP, Topic Modeling, Metis]
+tags: [xgboost, Classification, NLP, flask, Topic Modeling, Metis]
 mathjax: true
 ---
 
-I wanted to explore the relationship of product reviews to the success of the product. We live in a culture of providing reviews and comments on the products we buy is common place. I was curious if these comments could indicate whether or not the product would be successful or not. If some signal could be identified from initial product reviews, then this could be utilized in a company’s forecasting process to help improve the overall accuracy of a product’s forecast. Overall, this model could be utilized to reduce the risk of introducing a new product into a market and help to answer the question of when to ramp up upstream production to capitalize on a trending product.
+Reveiws are ubiquitous these days. I get done with my Uber/Lyft ride, they want a review. I get done riding a Lime bike or scooter, they want a review. I buy something from Amazon, they want a review. The review has almost replaced the reciept, its the expected end of every transaction. Is there data or patterns in these reviews that can actually be turned into insights for these respective vendors? This is the broad topic I decided to tackle in my fourth project at Metis.
+
+I narrowed this topic down to specifically analyze whether or not a review can predict a product will trend or not. The scope of this project will leverage a data set of Amazon toy reviews, a calculation of whether or not product trends over a 30 day period, and finally an application of the trained model in a Flask app to "improve" a review to encourage a product to trend. Let's get started!
+
+<!-- I wanted to explore the relationship of product reviews to the success of the product. We live in a culture of providing reviews and comments on the products we buy is common place. I was curious if these comments could indicate whether or not the product would be successful or not. If some signal could be identified from initial product reviews, then this could be utilized in a company’s forecasting process to help improve the overall accuracy of a product’s forecast. Overall, this model could be utilized to reduce the risk of introducing a new product into a market and help to answer the question of when to ramp up upstream production to capitalize on a trending product. -->
 
 # Methodology
 
