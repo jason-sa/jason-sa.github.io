@@ -106,12 +106,12 @@ This analysis resulted in a probability cut-off of 0.482.
 
 # Results
 
-In general, we are more concerned with recall as being able to correctly identify the trending products is crucial for being able to capitalizing on the market trends and ultimately creating an established product. My model was able to identify 390/558 products which previously trended as trending, or 70%. 
+In general, we are more concerned with recall as being able to correctly identify the trending products is crucial for being able to capitalizing on the market trends and ultimately creating an established product. My model was able to identify 390/558 products which previously trended as trending, or 70%.
 
 In conclusion, the first review did provide some initial insight into whether or not a product will trend or not. I would love to enhance the model in the following ways,
 
 * Obtain actual product trend information to determine how accurate my proxy trend score is to a trend metric derived from historic sales.
-* Determine if adding more reviews, e.g. the first n days the product is on the market, to see if this improves the overall recall of my model. 
+* Determine if adding more reviews, e.g. the first n days the product is on the market, to see if this improves the overall recall of my model.
 * Would also like to explore a model with word embeddings to determine if this would improve model recall by relating similar documents in a word embedding space, instead of an LDA topic model.
 
 # Review generator app
