@@ -7,7 +7,7 @@ gh-badge: [star, fork, follow]
 tags: [NLP, xgboost, Random Forest, bot, Slack, Metis]
 ---
 
-I wanted to explore the NLP topic of semantic similarity between questions. Specifically, whether or not two questions have the same intent or not.  Training a classification model to detect whether or not two questions have the same intent can lend itself to different applications. For example, the model could be used to easily lookup answers to previously asked questions. I took this example and developed a proof of concept Slack bot to demonstrate how my trained model could search previously answered questions, and responded with similar answers.
+I wanted to explore the NLP topic of semantic similarity between questions. Specifically, whether or not two questions have the same intent. Training a classification model to detect whether or not two questions have the same intent can lend itself to different applications. I applied the model by building a Slack bot to allow any user to ask any question, and the bot will respond with an answer that is the most similar to that of a previously answered question.
 
 # Methodology
 
